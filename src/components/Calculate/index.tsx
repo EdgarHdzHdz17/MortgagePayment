@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 interface CalculateComponentProps {
-  monthPayment: string | undefined;
-  totalPayment: string | undefined;
+  monthPayment: number;
+  totalPayment: number;
 }
 
 const CalculateComponent: React.FC<CalculateComponentProps> = ({
@@ -19,9 +19,9 @@ const CalculateComponent: React.FC<CalculateComponentProps> = ({
       </span>
       <SubContainer>
         <h3>Your monthly repayments</h3>
-        <h1>$ {monthPayment}</h1>
+        <h1>$ {Number(monthPayment.toFixed(2)).toLocaleString("en-US")}</h1>
         <h3>Total you'll repay over the term </h3>
-        <h2>$ {totalPayment}</h2>
+        <h2>$ {Number(totalPayment.toFixed(2)).toLocaleString("en-US")}</h2>
       </SubContainer>
     </Container>
   );

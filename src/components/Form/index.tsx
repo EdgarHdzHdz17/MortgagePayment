@@ -33,10 +33,17 @@ const FormComponent: React.FC<FormComponentProps> = ({
           <label>
             $
             <input
+              type="number"
               placeholder="Only Numbers"
-              value={morgageAmount}
-              onChange={(e) => setMorgageAmount(Number(e.target.value))}
-              maxLength={6}
+              value={morgageAmount !== undefined ? morgageAmount : ""}
+              onChange={(e) => {
+                const value = Number(e.target.value);
+                if (value >= 0 && value <= 999999) {
+                  setMorgageAmount(value);
+                }
+              }}
+              min={0}
+              max={999999}
             />
           </label>
         </AmountContainer>
@@ -46,10 +53,10 @@ const FormComponent: React.FC<FormComponentProps> = ({
             <label>
               Years
               <input
+                type="number"
                 placeholder="Only Numbers"
-                value={mortgageTerm}
+                value={mortgageTerm !== undefined ? mortgageTerm : ""}
                 onChange={(e) => setMortgageTerm(Number(e.target.value))}
-                maxLength={2}
               />
             </label>
           </div>
@@ -58,10 +65,17 @@ const FormComponent: React.FC<FormComponentProps> = ({
             <label>
               %
               <input
+                type="number"
                 placeholder="Only Numbers"
-                value={interestRate}
-                onChange={(e) => setInterestRate(Number(e.target.value))}
-                maxLength={4}
+                value={interestRate !== undefined ? interestRate : ""}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  if (value >= 0 && value <= 100) {
+                    setInterestRate(value);
+                  }
+                }}
+                min={0}
+                max={99}
               />
             </label>
           </div>

@@ -11,11 +11,9 @@ function App() {
   const [mortgageTerm, setMortgageTerm] = useState<number>();
   const [interestRate, setInterestRate] = useState<number>();
   const [mortgageType, setMortgageType] = useState<string>(" ");
-  const [monthPayment, setMonthPayment] = useState<string>();
-  const [totalPayment, setTotalPayment] = useState<string>();
+  const [monthPayment, setMonthPayment] = useState<number>(0);
+  const [totalPayment, setTotalPayment] = useState<number>(0);
   const [paymed, setPaymed] = useState<boolean>(false);
-
-  console.log(mortgageType);
 
   const submitForm = (event: FormEvent) => {
     event.preventDefault();
@@ -39,8 +37,8 @@ function App() {
 
     const payTotal = payMonth * months;
 
-    setMonthPayment(payMonth.toFixed(2));
-    setTotalPayment(payTotal.toFixed(2));
+    setMonthPayment(payMonth);
+    setTotalPayment(payTotal);
 
     setPaymed(true);
   };
