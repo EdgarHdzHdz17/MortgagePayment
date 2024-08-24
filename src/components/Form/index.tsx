@@ -3,11 +3,11 @@ import CalculatorIllustration from "../../assets/images/icon-calculator.svg";
 import styled from "styled-components";
 interface FormComponentProps {
   morgageAmount: number | undefined;
-  setMorgageAmount: (value: number) => void;
+  setMorgageAmount: (value: number | undefined) => void;
   mortgageTerm: number | undefined;
-  setMortgageTerm: (value: number) => void;
+  setMortgageTerm: (value: number | undefined) => void;
   interestRate: number | undefined;
-  setInterestRate: (value: number) => void;
+  setInterestRate: (value: number | undefined) => void;
   mortgageType: string;
   setMortgageType: (value: string) => void;
   submitForm: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -24,9 +24,19 @@ const FormComponent: React.FC<FormComponentProps> = ({
   setMortgageType,
   submitForm,
 }) => {
+  const clearForm = () => {
+    setMorgageAmount(undefined);
+    setMortgageTerm(undefined);
+    setInterestRate(undefined);
+    setMortgageType(" ");
+  };
+
   return (
     <Container>
       <h1 className="Title">Mortgage Calculator</h1>
+      <span className="Clear" onClick={clearForm}>
+        Clear All
+      </span>
       <FormContainer onSubmit={submitForm}>
         <AmountContainer>
           <h2>Mortgage Amount</h2>
@@ -81,7 +91,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
           </div>
         </MortgageContainer>
         <TypeContainer>
-          <h2>Mortgage Type: {mortgageType}</h2>
+          <h2>Mortgage Type: {mortgageType.toUpperCase()}</h2>
           <label className="Select">
             <input
               className="radio-input"
@@ -124,6 +134,17 @@ const Container = styled.div`
     color: hsl(202, 55%, 16%);
   }
 
+  .Clear {
+    color: gray;
+    font-weight: bold;
+    cursor: pointer;
+    /* text-decoration: underline; */
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-color: gray;
+    text-underline-offset: 5px;
+  }
+
   .Calculate {
     background-color: yellowgreen;
     color: hsl(202, 55%, 16%);
@@ -136,7 +157,26 @@ const Container = styled.div`
     align-items: center;
     gap: 10px;
     margin-top: 20px;
-    width: 40%;
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .Title {
+      text-align: center;
+      font-size: 30px;
+    }
+
+    .Calculate {
+      width: 100%;
+      height: 50px;
+      padding: 10px;
+      font-size: 15px;
+    }
   }
 `;
 
@@ -153,7 +193,7 @@ const FormContainer = styled.form`
   label {
     display: flex;
     align-items: center;
-    width: 100%;
+    flex: 1;
     gap: 10px;
     padding: 0px 0px 0px 10px;
     font-size: 20px;
@@ -182,6 +222,15 @@ const FormContainer = styled.form`
       outline: none;
     }
   }
+
+  @media (max-width: 768px) {
+    gap: 5px;
+    font-size: 10px;
+
+    label {
+      font-size: 15px;
+    }
+  }
 `;
 
 const AmountContainer = styled.div`
@@ -201,13 +250,23 @@ const MortgageContainer = styled.div`
     justify-content: center;
     flex-direction: column;
   }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+
+    div {
+      width: 100%;
+    }
+  }
 `;
 
 const TypeContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 100%;
-  color: black;
   gap: 10px;
 
   .Select {
@@ -239,6 +298,10 @@ const TypeContainer = styled.div`
 
     &:hover {
       border: 2px solid yellowgreen;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 15px;
     }
   }
 `;

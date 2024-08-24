@@ -41,6 +41,15 @@ const Container = styled.div`
     font-size: 20px;
     color: gainsboro;
   }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    padding: 10px 20px;
+  }
 `;
 
 const SubContainer = styled.div`
@@ -71,5 +80,9 @@ const SubContainer = styled.div`
 
   h3 {
     color: gray;
+  }
+
+  @media (max-width: 768px) {
+    width: 60%;
   }
 `;

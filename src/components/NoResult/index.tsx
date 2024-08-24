@@ -22,9 +22,10 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px 80px;
+  padding: 10px 10px;
   gap: 20px;
   height: 100vh;
+  text-align: center;
 
   img {
     width: 50%;
@@ -35,5 +36,20 @@ const Container = styled.div`
     font-size: 20px;
     color: gainsboro;
     width: 80%;
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px 20px;
+
+    h1 {
+      font-size: 20px;
+    }
+
+    span {
+      text-align: center;
+      font-size: 15px;
+      color: gainsboro;
+      width: 100%;
+    }
   }
 `;

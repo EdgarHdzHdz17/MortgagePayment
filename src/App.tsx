@@ -24,7 +24,7 @@ function App() {
       interestRate === undefined ||
       mortgageType === " "
     ) {
-      console.error("Please fill in all fields.");
+      alert("Please fill all the fields");
       return;
     }
 
@@ -46,7 +46,7 @@ function App() {
   return (
     <Container>
       <Calculator>
-        <FormContainer>
+        <FormContainer paymed={paymed}>
           <FormComponent
             morgageAmount={mortgageAmount}
             setMorgageAmount={setMortgageAmount}
@@ -59,7 +59,7 @@ function App() {
             submitForm={submitForm}
           />
         </FormContainer>
-        <ResultContainer>
+        <ResultContainer paymed={paymed}>
           {paymed ? (
             <CalculateComponent
               monthPayment={monthPayment}
@@ -87,6 +87,8 @@ const Container = styled.div`
 
 const Calculator = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
   background-color: hsl(0, 0%, 100%);
   width: 90vw;
@@ -94,18 +96,32 @@ const Calculator = styled.div`
   border-radius: 10px;
 `;
 
-const FormContainer = styled.div`
+const FormContainer = styled.div<{ paymed: boolean }>`
   display: flex;
   flex-direction: column;
   width: 50%;
   height: 100%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 100%;
+    display: ${({ paymed }) => (paymed ? "none" : "flex")};
+  }
 `;
 
-const ResultContainer = styled.div`
+const ResultContainer = styled.div<{ paymed: boolean }>`
   display: flex;
   flex-direction: column;
   background-color: hsl(202, 55%, 16%);
   width: 50%;
   height: 100%;
   border-radius: 0px 10px 10px 200px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px 10px 10px 10px;
+    display: none;
+    display: ${({ paymed }) => (paymed ? "flex" : "none")};
+  }
 `;
